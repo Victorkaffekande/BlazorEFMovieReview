@@ -75,4 +75,13 @@ public class Repository :  IRepository
         }
         return review;
     }
+
+    public void Migrate()
+    {
+        using (var context = new RepositoryDbContext(_opts,ServiceLifetime.Scoped))
+        {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+        }
+    }
 }

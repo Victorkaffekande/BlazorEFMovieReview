@@ -13,7 +13,14 @@ public class RepositoryDbContext : Microsoft.EntityFrameworkCore.DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.Entity<Movie>().HasData(new Movie
+        {
+        Id=1,
+        ReleaseYear = 2021,
+        Title = "cool title",
+        Summary = "Cool movie",
+        BoxOfficeSumInMillions = 420
+        });
 
     }
 

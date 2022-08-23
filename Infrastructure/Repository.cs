@@ -1,4 +1,5 @@
 ﻿using Entities;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -59,10 +60,15 @@ public class Repository :  IRepository
     {
         using (var context = new RepositoryDbContext(_opts,ServiceLifetime.Scoped))
         {
-            context.MovieTable.Add(movie);
-            context.SaveChanges();
-            return movie;
+            var validator = new MovieValidator();
+            var result = validator.Validate(movie);
+            if (result.IsValid)
+            {
+                context.MovieTable.Add(movie);
+                context.SaveChanges();
+            }
         }
+        return movie;
     }
 
     public Review AddReview(Review review)

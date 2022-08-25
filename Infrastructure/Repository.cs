@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using System.Text;
+using Entities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ namespace Infrastructure;
 public class Repository :  IRepository
 {
 
-    
+
     private DbContextOptions<RepositoryDbContext> _opts;
 
     public Repository()
